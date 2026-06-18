@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ట్రీ ప్లాంటేషన్ డ్రైవ్ - Tree Plantation Drive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2d5016;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+        
+        .form-section {
+            background: #f0f9e8;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid #2d5016;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d5016;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #2d5016;
+        }
+        
+        button {
+            background: #2d5016;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #1a3009;
+        }
+        
+        .report-section {
+            background: #e8f5e9;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid #2d5016;
+            display: none;
+        }
+        
+        .report-section.show {
+            display: block;
+        }
+        
+        .report-title {
+            text-align: center;
+            color: #2d5016;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .report-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 5px solid #2d5016;
+        }
+        
+        .report-item span {
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .tree-count {
+            font-size: 2em;
+            color: #2d5016;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .volunteer-list {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .volunteer-item {
+            background: #f0f9e8;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌿 ట్రీ ప్లాంటేషన్ డ్రైవ్ 🌿</h1>
+        <p class="subtitle">Tree Plantation Drive Management System</p>
+        
+        <div class="form-section">
+            <div class="form-group">
+                <label>📢 డ్రైవ్ నామం (Drive Name):</label>
+                <input type="text" id="driveName" placeholder="ఉదా: ముంబై గ్రీన్ క్యాంప్">
+            </div>
+            
+            <div class="form-group">
+                <label>📍 లొకేషన్ (Location):</label>
+                <input type="text" id="location" placeholder="ఉదా: ముంబై, మహారాష్ట్ర">
+            </div>
+            
+            <div class="form-group">
+                <label>👥 విలంటర్ పేరు (Volunteer Name):</label>
+                <input type="text" id="volunteerName" placeholder="విలంటర్ పేరు ఇవ్వండి">
+                <button onclick="addVolunteer()" style="margin-top: 10px;">✅ విలంటర్ ఎంచుకోండి</button>
+            </div>
+            
+            <div class="form-group">
+                <label>🌳 పొద నామం (Tree Type):</label>
+                <select id="treeType">
+                    <option value="Bilachi">Bilachi</option>
+                    <option value="Mango">Mango</option>
+                    <option value="Neem">Neem</option>
+                    <option value="Peepal">Peepal</option>
+                    <option value="Banyan">Banyan</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>🔢 సంఖ్య (Quantity):</label>
+                <input type="number" id="quantity" value="1" min="1">
+                <button onclick="plantTree()" style="margin-top: 10px;">🌳 పొద ప్లాంట్ చేయండి</button>
+            </div>
+        </div>
+        
+        <div class="report-section" id="report">
+            <div class="report-title">📊 డ్రైవ్ సమార్యం</div>
+            
+            <div class="report-item">
+                <span class="emoji">📢</span> <strong>డ్రైవ్ నామం:</strong> <span id="reportName">-</span>
+            </div>
+            
+            <div class="report-item">
+                <span class="emoji">📍</span> <strong>లొకేషన్:</strong> <span id="reportLocation">-</span>
+            </div>
+            
+            <div class="tree-count">
+                <span class="emoji">🌳</span> <span id="totalTrees">0</span> <span class="emoji">🌳</span>
+                <br><small>మొత్తం ప్లాంట్ చేయబడిన పొదలు</small>
+            </div>
+            
+            <div class="report-item">
+                <span class="emoji">👥</span> <strong>విలంటర్ల సంఖ్య:</strong> <span id="volunteerCount">0</span>
+            </div>
+            
+            <div class="report-item">
+                <span class="emoji">👨‍👩‍👧‍👧</span> <strong>విలంటర్లు:</strong>
+                <div class="volunteer-list" id="volunteerList">
+                    <small>విలంటర్లు లేరు</small>
+                </div>
+            </div>
+            
+            <button onclick="resetDrive()" style="margin-top: 20px; background: #dc3545;">🔄 రీసెట్ చేయండి</button>
+        </div>
+    </div>
+    
+    <script>
+        let treesPlanted = 0;
+        let volunteers = [];
+        let driveName = "";
+        let location = "";
+        
+        function addVolunteer() {
+            const name = document.getElementById('volunteerName').value.trim();
+            if (name === "") {
+                alert("⚠️ విలంటర్ పేరు ఇవ్వండి!");
+                return;
+            }
+            
+            volunteers.push(name);
+            alert(`✅ ${name} విలంటర్ గా ఎంపికైయ్యారు!`);
+            document.getElementById('volunteerName').value = "";
+            updateReport();
+        }
+        
+        function plantTree() {
+            const treeType = document.getElementById('treeType').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            
+            if (quantity < 1) {
+                alert("⚠️ సంఖ్య 1 కంటే ఎక్కువ అవాలి!");
+                return;
+            }
+            
+            treesPlanted += quantity;
+            alert(`🌳 ${quantity} ${treeType} పొదలు ప్లాంట్ చేయబడ్డాయి!`);
+            document.getElementById('quantity').value = "1";
+            updateReport();
+        }
+        
+        function updateReport() {
+            const name = document.getElementById('driveName').value;
+            const loc = document.getElementById('location').value;
+            
+            if (name) driveName = name;
+            if (loc) location = loc;
+            
+            document.getElementById('reportName').textContent = driveName || "-";
+            document.getElementById('reportLocation').textContent = location || "-";
+            document.getElementById('totalTrees').textContent = treesPlanted;
+            document.getElementById('volunteerCount').textContent = volunteers.length;
+            
+            const volunteerList = document.getElementById('volunteerList');
+            if (volunteers.length > 0) {
+                volunteerList.innerHTML = volunteers.map(v => 
+                    `<span class="volunteer-item">✅ ${v}</span>`
+                ).join('');
+            } else {
+                volunteerList.innerHTML = "<small>విలంటర్లు లేరు</small>";
+            }
+            
+            document.getElementById('report').classList.add('show');
+        }
+        
+        function resetDrive() {
+            treesPlanted = 0;
+            volunteers = [];
+            driveName = "";
+            location = "";
+            
+            document.getElementById('driveName').value = "";
+            document.getElementById('location').value = "";
+            document.getElementById('volunteerName').value = "";
+            document.getElementById('quantity').value = "1";
+            document.getElementById('report').classList.remove('show');
+            
+            alert("🔄 డ్రైవ్ రీసెట్ చేయబడింది!");
+        }
+        
+        // Auto update on drive name/location change
+        document.getElementById('driveName').addEventListener('input', updateReport);
+        document.getElementById('location').addEventListener('input', updateReport);
+    </script>
+</body>
+</html>
